@@ -1,49 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container text-center my-5">
-        <h1>Add Course</h1>
-        <div class="container text-center my-5 w-50 mx-auto" style="border: 1px solid #000; padding: 20px; border-radius: 10px; background-color: #f8f9fa;">
-            <form class="form-horizontal" method="POST" action="{{ route('courses.store') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <label for="course_code">Course Code</label>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4 md:mb-0">Create Course</h2>
+        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="max-w-xl">
+                <form class="form-horizontal" method="POST" action="{{ route('courses.store') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-3">
+                        <x-input-label for="course_code" :value="__('Course Code')" />
+                        <x-text-input id="course_code" name="course_code" type="text" class="mt-1 block w-full" required autofocus autocomplete="course_code" />
+                        <x-input-error class="mt-2" :messages="$errors->get('course_code')" />
                     </div>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="course_code" name="course_code" required>
-                        @error('course_code')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                    <div class="mb-3">
+                        <x-input-label for="course_description" :value="__('Course Description')" />
+                        <x-text-input id="course_description" name="course_description" type="text" class="mt-1 block w-full" required autofocus autocomplete="course_description" />
+                        <x-input-error class="mt-2" :messages="$errors->get('course_description')" />
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <label for="course_description">Course Description</label>
+                    <div class="mb-3">
+                            <x-input-label for="photo_url" :value="__('Photo URL')" />
+                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" required autofocus autocomplete="photo_url" />
+                            <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
+
                     </div>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="course_description" name="course_description" required></textarea>
-                        @error('course_description')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                    <div class="d-flex flex-row justify-content-end gap-2 mt-4">
+                        <x-primary-button text="Create Course" type="submit">{{__('Create Course')}}</x-primary-button>
+                        <x-secondary-button text="Cancel" type="button" onclick="window.location.href='{{ route('courses.index') }}'">{{__('Cancel')}}</x-secondary-button>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <label for="photo_url">Photo URL</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input type="file" class="form-control" id="photo_url" name="photo_url">
-                        @error('photo_url')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="d-flex flex-row justify-content-end gap-2">
-                    <button type="submit" class="btn btn-primary">Add Course</button>
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('courses.index') }}'">Cancel</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

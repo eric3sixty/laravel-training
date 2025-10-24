@@ -45,7 +45,7 @@
                         <x-text-input id="photo_url" name="photo_url" type="text" class="mt-1 block w-full" :value="old('photo_url', $data->photo_url)" required autocomplete="photo_url" />
                         <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
                     </div>
-                    <div class="flex items-center gap-4 justify-end mt-4">
+                    <div class="d-flex flex-row justify-content-end gap-2">
                         <x-primary-button text="Update Student" type="submit">{{__('Update Student')}}</x-primary-button>
                         <x-secondary-button text="Back to Students List" type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('students.index') }}'">{{__('Back to Students List')}}</x-secondary-button>
                     </div>
